@@ -25,5 +25,5 @@ object BoundVsVariance extends App {
 
     // Bounds
     val animalsBarn: Barn[Animal] = Barn(new Dog, new Animal)
-    // val carBarn = Barn(new Car) // error
+    //val carBarn = Barn(new Car) // error
 }

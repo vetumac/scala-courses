@@ -18,7 +18,9 @@ class Point(val x: Double, val y: Double) {
   def quadrant: String = this match {
     case p if p.x > 0 && p.y > 0 => "First"
     case p if p.x > 0 && p.y < 0 => "Second"
-    case p if p.x < 0 && p.y < 0 => "Second"
+    case p if p.x < 0 && p.y > 0 => "Third"
+    case p if p.x < 0 && p.y < 0 => "Fourth"
+    case _ => "Not in any quadrant"
   }
 
   override def toString = "(" + x + ";" + y + ")"
@@ -34,5 +36,9 @@ class Point(val x: Double, val y: Double) {
 
 object Point {
   def distance(p1: Point, p2: Point): Double = math.sqrt(math.pow(p1.x - p2.x, 2) + math.pow(p1.y - p2.y, 2))
+
+  def isSimeteic(p1: Point, p2: Point): Boolean = p1.x == -p2.x && p1.y == -p2.y
+
+  def isCollinear(p1: Point, p2: Point, p3: Point): Boolean = (p3.y - p1.y) * (p2.x - p1.x) == (p2.y - p1.y) * p3.x - (p2.y - p1.y) * p1.x
 }
 

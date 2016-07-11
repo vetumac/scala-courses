@@ -9,5 +9,6 @@ object App {
     println(point.move(2.5, 2))
     println(point.distance(new Point(3, 4)))
     println(point.compareTo(new Point(2, 4)))
+    println(Point.isCollinear(new Point(0, 0), new Point(1, 1), new Point(2, 2)))
   }
 }

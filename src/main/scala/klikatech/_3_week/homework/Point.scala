@@ -1,17 +1,38 @@
 package klikatech._3_week.homework
 
-class Point(x: Double, y: Double) {
-  override def toString = "(" + x + ";" + y + ")"
+class Point(val x: Double, val y: Double) {
 
-  override def equals(that: Any): Boolean = {
-    that match {
-      case point: Point => this.x == point.x && this.y == point.y
-      case _ => false
+  def move(x: Double, y: Double): Point = new Point(x + this.x, y + this.y)
+
+  def distance(that: Point): Double = Point.distance(this, that)
+
+  def compareTo(that: Any): Int = that match {
+    case point: Point => Point.distance(point, new Point(0, 0)) - Point.distance(this, new Point(0, 0)) match {
+      case i if i > 0 => 1
+      case i if i < 0 => -1
+      case _ => 0
     }
+    case _ => throw new IllegalArgumentException
   }
 
-  override def hashCode: Int = x.hashCode() + 31 * y.hashCode()
+  def quadrant: String = this match {
+    case p if p.x > 0 && p.y > 0 => "First"
+    case p if p.x > 0 && p.y < 0 => "Second"
+    case p if p.x < 0 && p.y < 0 => "Second"
+  }
 
+  override def toString = "(" + x + ";" + y + ")"
 
+  override def equals(that: Any): Boolean = that match {
+    case point: Point => x == point.x && y == point.y
+    case _ => false
+  }
+
+  override def hashCode: Int = ("" + x + y).hashCode
+
+}
+
+object Point {
+  def distance(p1: Point, p2: Point): Double = math.sqrt(math.pow(p1.x - p2.x, 2) + math.pow(p1.y - p2.y, 2))
 }
 
